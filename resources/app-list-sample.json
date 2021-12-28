@@ -1,138 +1,18 @@
 [
     {
-      "package": "jp.softbank.mb.ichinaviclt",
-      "uninstall": "yes"
+        "package": "com.sample.app.1",
+        "uninstall": "no"
     },
     {
-      "package": "jp.co.sharp.android.emopar.internalcontent2",
-      "uninstall": "yes"
+        "package": "com.sample.app.2",
+        "uninstall": "yes"
     },
     {
-      "package": "jp.co.sharp.android.emopar.internalcontent",
-      "uninstall": "yes"
+        "package": "com.sample.app.3",
+        "uninstall": "yes"
     },
     {
-      "package": "jp.softbank.mb.parentalcontrols",
-      "uninstall": "yes"
-    },
-    {
-      "package": "jp.co.softbank.mb.pim",
-      "uninstall": "yes"
-    },
-    {
-      "package": "co.yahoo.android.yjtop",
-      "uninstall": "yes"
-    },
-    {
-      "package": "jp.co.softbank.wispr.froyo",
-      "uninstall": "yes"
-    },
-    {
-      "package": "jp.softbank.mb.vdetection",
-      "uninstall": "yes"
-    },
-    {
-      "package": "jp.softbank.mb.cbrl",
-      "uninstall": "yes"
-    },
-    {
-      "package": "com.android.apps.tag",
-      "uninstall": "yes"
-    },
-    {
-      "package": "softbank.mobileid.installer",
-      "uninstall": "yes"
-    },
-    {
-      "package": "jp.co.sharp.android.iwnnime.ml",
-      "uninstall": "yes"
-    },
-    {
-      "package": "com.amazon.avod.thirdpartyclient",
-      "uninstall": "yes"
-    },
-    {
-      "package": "com.felicanetworks.mfw.a.main",
-      "uninstall": "yes"
-    },
-    {
-      "package": "com.felicanetworks.mfm.main",
-      "uninstall": "yes"
-    },
-    {
-      "package": "com.felicanetworks.mfm",
-      "uninstall": "yes"
-    },
-    {
-      "package": "com.android.hotwordenrollment",
-      "uninstall": "yes"
-    },
-    {
-      "package": "com.mobisystems.office",
-      "uninstall": "yes"
-    },
-    {
-      "package": "jp.softbank.mb.dtm",
-      "uninstall": "yes"
-    },
-    {
-      "package": "com.mobileselect.somcprein",
-      "uninstall": "yes"
-    },
-    {
-      "package": "com.sprint.ce.updater",
-      "uninstall": "yes"
-    },
-    {
-      "package": "com.felicanetworks.mfc",
-      "uninstall": "yes"
-    },
-    {
-      "package": "jp.softbank.mb.mail",
-      "uninstall": "yes"
-    },
-    {
-      "package": "jp.co.sharp.android.karadamate",
-      "uninstall": "yes"
-    },
-    {
-      "package": "com.ipg.gguide.sbm_app.android",
-      "uninstall": "yes"
-    },
-    {
-      "package": "jp.softbank.mb.manualviewer40",
-      "uninstall": "yes"
-    },
-    {
-      "package": "com.google.android.music",
-      "uninstall": "yes"
-    },
-    {
-      "package": "com.google.android.videos",
-      "uninstall": "yes"
-    },
-    {
-      "package": "jp.co.disney.apps.dm.disneyinstaller",
-      "uninstall": "yes"
-    },
-    {
-      "package": "jp.softbank.mb.dmb",
-      "uninstall": "yes"
-    },
-    {
-      "package": "jp.softbank.beginnerguide",
-      "uninstall": "yes"
-    },
-    {
-      "package": "jp.softbank.mobileid.installer",
-      "uninstall": "yes"
-    },
-    {
-      "package": "jp.co.disney.apps.base.disneymarketapp",
-      "uninstall": "yes"
-    },
-    {
-      "package": "jp.co.sharp.exapps",
-      "uninstall": "yes"
+        "package": "com.sample.app.4",
+        "uninstall": "yes"
     }
 ]
