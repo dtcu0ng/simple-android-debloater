@@ -40,7 +40,7 @@ if (($AdbFiles | ForEach-Object {test-path $AdbPath\$_}) -contains $false) {
     }
 }
 if (-not (Test-Path -Path $AppListPath)) {
-    $AppListPath = Read-Host -Prompt "App list JSON file not found in $AppListPath. Please specify path in this prompt"
+    $AppListPath = Read-Host -Prompt "App list JSON file not found in $AppListPath. Please specify path in this prompt (You can drag'n drop app list JSON file to this window.)"
     if ($AppListPath -eq [string]::empty){
         Write-Output "Invaild App list JSON path. Please download the app list JSON and place it to $AppListPath."
         exit 1
