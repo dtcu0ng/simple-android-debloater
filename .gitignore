@@ -1,2 +1,4 @@
 uninstall.*
+startsrc.*
+cleanup_development.*
 minimal-platform-tools/*
