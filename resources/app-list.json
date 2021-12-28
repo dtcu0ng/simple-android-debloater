@@ -1,0 +1,18 @@
+[
+    {
+        "package": "com.sample.app.1",
+        "uninstall": "no"
+    },
+    {
+        "package": "com.sample.app.2",
+        "uninstall": "yes"
+    },
+    {
+        "package": "com.sample.app.3",
+        "uninstall": "yes"
+    },
+    {
+        "package": "com.sample.app.4",
+        "uninstall": "yes"
+    }
+]
