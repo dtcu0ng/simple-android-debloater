@@ -57,11 +57,13 @@ function Uninstall {
             Run "$AdbPath/adb.exe shell pm disable-user $AppListData[$i].package"
             Write-Host "Uninstalling" $AppListData[$i].package
             Run "$AdbPath/adb.exe shell pm uninstall --user 0 $AppListData[$i].package"
+            #TODO: use try catch to catch errors
         } else {
             Write-Host "Skipped" $AppListData[$i].package "( uninstall state:" $AppListData[$i].uninstall ")"
         }
-    
-    }    
+    }
+    Write-Host "Action completed with" $AppListData.Count "app(s) from list $AppListPath"
+    Pause
 }
 
 function CheckDevices {
