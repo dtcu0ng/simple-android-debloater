@@ -45,18 +45,20 @@ if (-not (Test-Path -Path $AppListPath)) {
         Write-Output "Invaild App list JSON path. Please download the app list JSON and place it to $AppListPath."
         exit 1
     }
+    $AppListData = Get-Content -Raw -Path $AppListPath | ConvertFrom-Json
+} else {
+    $AppListData = Get-Content -Raw -Path $AppListPath | ConvertFrom-Json
 }
 
 function Uninstall {
-    $JsonData = Get-Content -Raw -Path $AppListPath | ConvertFrom-Json
-    for ($i=0; $i -lt $JsonData.Count; $i=$i+1 ) {
-        if ($JsonData[$i].uninstall -eq "yes"){
-            Write-Host "Disabling" $JsonData[$i].package
-            Run "$AdbPath/adb.exe shell pm disable-user $JsonData[$i].package"
-            Write-Host "Uninstalling" $JsonData[$i].package
-            Run "$AdbPath/adb.exe shell pm uninstall --user 0 $JsonData[$i].package"
+    for ($i=0; $i -lt $AppListData.Count; $i=$i+1 ) {
+        if ($AppListData[$i].uninstall -eq "yes"){
+            Write-Host "Disabling" $AppListData[$i].package
+            Run "$AdbPath/adb.exe shell pm disable-user $AppListData[$i].package"
+            Write-Host "Uninstalling" $AppListData[$i].package
+            Run "$AdbPath/adb.exe shell pm uninstall --user 0 $AppListData[$i].package"
         } else {
-            Write-Host "Skipped" $JsonData[$i].package "( uninstall state:" $JsonData[$i].uninstall ")"
+            Write-Host "Skipped" $AppListData[$i].package "( uninstall state:" $AppListData[$i].uninstall ")"
         }
     
     }    
