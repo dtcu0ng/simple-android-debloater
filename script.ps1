@@ -20,11 +20,11 @@ if ( "$checkAdmin" -eq "on" ) {
     }
 }
 function Header {
-    Write-Host "------------------"
-    Write-Host "Simple Android debloater"
-    Write-Host "Source code: https://github.com/dtcu0ng/simple-android-debloater"
-    Write-Host "(c) dtcu0ng"
-    Write-Host "------------------"
+    Write-Output "------------------"
+    Write-Output "Simple Android debloater"
+    Write-Output "Source code: https://github.com/dtcu0ng/simple-android-debloater"
+    Write-Output "(c) dtcu0ng"
+    Write-Output "------------------"
 }
 if (($AdbFiles | ForEach-Object {test-path $AdbPath\$_}) -contains $false) {
     $message = Read-Host -Prompt "Not found neccessary ADB file in folder $AdbPath. Would you like to download minimal-platform-tools? (Y/N)"
@@ -53,21 +53,21 @@ if (-not (Test-Path -Path $AppListPath)) {
 function Uninstall {
     for ($i=0; $i -lt $AppListData.Count; $i=$i+1 ) {
         if ($AppListData[$i].uninstall -eq "yes"){
-            Write-Host "Disabling" $AppListData[$i].package
+            Write-Output "Disabling" $AppListData[$i].package
             Run "$AdbPath/adb.exe shell pm disable-user $AppListData[$i].package"
-            Write-Host "Uninstalling" $AppListData[$i].package
+            Write-Output "Uninstalling" $AppListData[$i].package
             Run "$AdbPath/adb.exe shell pm uninstall --user 0 $AppListData[$i].package"
             #TODO: use try catch to catch errors
         } else {
-            Write-Host "Skipped" $AppListData[$i].package "( uninstall state:" $AppListData[$i].uninstall ")"
+            Write-Output "Skipped" $AppListData[$i].package "( uninstall state:" $AppListData[$i].uninstall ")"
         }
     }
-    Write-Host "Action completed with" $AppListData.Count "app(s) from list $AppListPath"
+    Write-Output "Action completed with" $AppListData.Count "app(s) from list $AppListPath"
     Pause
 }
 
 function CheckDevices {
-    Write-Host "To begin, you should connect only one device and enable USB debugging in your device's Developer Settings "
+    Write-Output "To begin, you should connect only one device and enable USB debugging in your device's Developer Settings "
     $message = Read-Host -Prompt "Press Y to continue."
     if ($message -eq 'y'){
         Run "$AdbPath/adb kill-server"
@@ -75,10 +75,10 @@ function CheckDevices {
         $message = Read-Host -Prompt "Do you see your device in the list below? (Y/n)"
         if ($message -eq "y"){
             Pause
-            Write-Host "Starting uninstall apps with list $AppListPath"
+            Write-Output "Starting uninstall apps with list $AppListPath"
             Uninstall
         }
-    }  
+    }
 }
 
 function Main {
