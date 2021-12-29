@@ -50,19 +50,23 @@ if (-not (Test-Path -Path $AppListPath)) {
     $AppListData = Get-Content -Raw -Path $AppListPath | ConvertFrom-Json
 }
 
+$NumberOfApps = $AppListData.Count
+
 function Uninstall {
-    for ($i=0; $i -lt $AppListData.Count; $i=$i+1 ) {
-        if ($AppListData[$i].uninstall -eq "yes"){
-            Write-Output "Disabling" $AppListData[$i].package
-            Run "$AdbPath/adb.exe shell pm disable-user $AppListData[$i].package"
-            Write-Output "Uninstalling" $AppListData[$i].package
-            Run "$AdbPath/adb.exe shell pm uninstall --user 0 $AppListData[$i].package"
+    for ($i=0; $i -lt $NumberOfApps; $i=$i+1 ) {
+        $UninstallState = $AppListData[$i].uninstall
+        $AppPackage = $AppListData[$i].package
+        if ($UninstallState -eq "yes"){
+            Write-Output "Disabling $AppPackage"
+            Run "$AdbPath/adb.exe shell pm disable-user $AppPackage"
+            Write-Output "Uninstalling $AppPackage"
+            Run "$AdbPath/adb.exe shell pm uninstall --user 0 $AppPackage"
             #TODO: use try catch to catch errors
         } else {
-            Write-Output "Skipped" $AppListData[$i].package "( uninstall state:" $AppListData[$i].uninstall ")"
+            Write-Output ("Skipped ${AppPackage}: $UninstallState")
         }
     }
-    Write-Output "Action completed with" $AppListData.Count "app(s) from list $AppListPath"
+    Write-Output ("Action completed with $NumberOfApps app(s) from list $AppListPath")
     Pause
 }
 
