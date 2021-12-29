@@ -14,7 +14,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
-      - name: Prepare Powershell
+      - name: Run ScriptAnalyzer
         run:
-          powershell -Command "& {Invoke-ScriptAnalyzer -Path '.\script.ps1}"
+          powershell -Command "& {Invoke-ScriptAnalyzer -Path '.\script.ps1'}"
 
