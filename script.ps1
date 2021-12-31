@@ -36,7 +36,8 @@ if (($AdbFiles | ForEach-Object {test-path $AdbPath\$_}) -contains $false) {
         Get-ChildItem -Path "$pt_archive_name" -Recurse |  Move-Item -Destination .
         Write-Output "Extracted."
     } else {
-        Write-Output "You selected No. This program will not run if missing ADB files. Make sure you gather all $AdbFiles and save it to platform-tools folder in the script dir."
+        Write-Output "You selected No. This program will not run if missing ADB files. Make sure you gather all $AdbFiles and save it to platform-tools folder in the script dir."\
+        exit 1
     }
 }
 if (-not (Test-Path -Path $AppListPath)) {
@@ -49,8 +50,6 @@ if (-not (Test-Path -Path $AppListPath)) {
 } else {
     $AppListData = Get-Content -Raw -Path $AppListPath | ConvertFrom-Json
 }
-
-$NumberOfApps = $AppListData.Count
 
 function Uninstall {
     for ($i=0; $i -lt $NumberOfApps; $i=$i+1 ) {
@@ -66,14 +65,17 @@ function Uninstall {
             Write-Output ("Skipped ${AppPackage}: $UninstallState")
         }
     }
-    Write-Output ("Action completed with $NumberOfApps app(s) from list $AppListPath")
-    Pause
+    Write-Output ("Action completed with ${AppListData.Count} app(s) from list $AppListPath")
+    exit
 }
 
 function CheckDevices {
     Write-Output "To begin, you should connect only one device and enable USB debugging in your device's Developer Settings "
     $message = Read-Host -Prompt "Press Y to continue."
-    if ($message -eq 'y'){
+    if ($message -ne 'y'){
+        Write-Output "You're not ready? That's okay. Run the script again when you're ready. "
+        exit
+    } else {
         Run "$AdbPath/adb kill-server"
         Run "$AdbPath/adb devices"
         $message = Read-Host -Prompt "Do you see your device in the list below? (Y/n)"
@@ -81,6 +83,9 @@ function CheckDevices {
             Pause
             Write-Output "Starting uninstall apps with list $AppListPath"
             Uninstall
+        } else {
+            Write-Output "Please reconnect your device and make sure you have enabled USB Debugging in your phone's Developer settings then run the script again."
+            exit
         }
     }
 }
