@@ -36,7 +36,7 @@ if (($AdbFiles | ForEach-Object {test-path $AdbPath\$_}) -contains $false) {
         Get-ChildItem -Path "$pt_archive_name" -Recurse |  Move-Item -Destination .
         Write-Output "Extracted."
     } else {
-        Write-Host "You selected No. This program will not run if missing ADB files. Make sure you gather all $AdbFiles and save it to platform-tools folder in the script dir."\
+        Write-Output "You selected No. This program will not run if missing ADB files. Make sure you gather all $AdbFiles and save it to platform-tools folder in the script dir."\
         exit 1
     }
 }
