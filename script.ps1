@@ -20,14 +20,15 @@ if ( "$checkAdmin" -eq "on" ) {
     }
 }
 function Header {
-    Write-Output "------------------"
+    Write-Output "-----------------------------------------------------------------"
     Write-Output "Simple Android debloater"
     Write-Output "Source code: https://github.com/dtcu0ng/simple-android-debloater"
     Write-Output "(c) dtcu0ng"
-    Write-Output "------------------"
+    Write-Output "-----------------------------------------------------------------"
 }
 if (($AdbFiles | ForEach-Object {test-path $AdbPath\$_}) -contains $false) {
-    $message = Read-Host -Prompt "Not found neccessary ADB file in folder $AdbPath. Would you like to download minimal-platform-tools? (Y/N)"
+    Write-Output "Not found neccessary ADB file in folder $AdbPath."
+    $message = Read-Host -Prompt "Would you like to download minimal-platform-tools? (Y/N)"
     if ($message -eq 'y'){
         Write-Output "Downloading platform-tools... (Usually this will take 2-3 min, depend on your internet connection.)"
         GetFile "$pt_url" -UseBasicParsing -OutFile "$pt_archive_name"
@@ -36,12 +37,14 @@ if (($AdbFiles | ForEach-Object {test-path $AdbPath\$_}) -contains $false) {
         Get-ChildItem -Path "$pt_archive_name" -Recurse |  Move-Item -Destination .
         Write-Output "Extracted."
     } else {
-        Write-Output "You selected No. This program will not run if missing ADB files. Make sure you gather all $AdbFiles and save it to platform-tools folder in the script dir."\
+        Write-Output "You selected No. This program will not run if missing ADB files."
+        Write-Output "Make sure you gather all $AdbFiles and save it to platform-tools folder in the script dir."
         exit 1
     }
 }
 if (-not (Test-Path -Path $AppListPath)) {
-    $AppListPath = Read-Host -Prompt "App list JSON file not found in $AppListPath. Please specify path in this prompt (You can drag'n drop app list JSON file to this window.)"
+    Write-Output "App list JSON file not found in $AppListPath."
+    $AppListPath = Read-Host -Prompt "Please specify path in this prompt (You can drag'n drop app list JSON file to this window.)"
     if ($AppListPath -eq [string]::empty){
         Write-Output "Invaild App list JSON path. Please download the app list JSON and place it to $AppListPath."
         exit 1
@@ -84,7 +87,8 @@ function CheckDevices {
             Write-Output "Starting uninstall apps with list $AppListPath"
             Uninstall
         } else {
-            Write-Output "Please reconnect your device and make sure you have enabled USB Debugging in your phone's Developer settings then run the script again."
+            Write-Output "Please reconnect your device."
+            Write-Output "Make sure you have enabled USB Debugging in your phone's Developer settings then run the script again."
             exit
         }
     }
